@@ -6,39 +6,24 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: test
-        identifier: test
+        name: build
+        identifier: build
         description: ""
-        type: Custom
+        type: CI
         spec:
+          cloneCodebase: false
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
           execution:
             steps:
               - step:
-                  type: ShellScript
+                  type: Run
                   name: echo
                   identifier: echo
                   spec:
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: echo blah
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
-              - step:
-                  type: ShellScript
-                  name: echo2
-                  identifier: echo2
-                  spec:
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: echo foo
-                    environmentVariables: []
-                    outputVariables: []
-                  timeout: 10m
-        tags: {}
+                    shell: Sh
+                    command: echo test
